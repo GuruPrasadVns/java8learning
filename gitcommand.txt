@@ -21,4 +21,6 @@ remote: Permission to GuruPrasadVns/java8learning.git denied to prasadgvns.
 
 https://stackoverflow.com/questions/5335197/gits-famous-error-permission-to-git-denied-to-user
 
+commented to check from mac.
+
 
