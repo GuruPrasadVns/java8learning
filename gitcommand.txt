@@ -1,0 +1,24 @@
+git remote add origin https://github.com/GuruPrasadVns/java8learning.git
+git branch -M main
+git push -u origin main
+
+Initial Problem
+--------------------------------------------------------------------------------------------------------------------
+fatal: unable to access 'https://github.com/GuruPrasadVns/java8learning.git/': The requested URL returned error: 403
+
+https://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed
+
+after this :
+
+prasag1@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+ssh -T prasag1@github.com
+
+git remote -v
+
+remote: Permission to GuruPrasadVns/java8learning.git denied to prasadgvns.
+
+https://stackoverflow.com/questions/5335197/gits-famous-error-permission-to-git-denied-to-user
+
+
