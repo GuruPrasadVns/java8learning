@@ -1,0 +1,22 @@
+1) root -> null ; diameter(root)
+----------------------------------------
+	diameter(null)
+	----------------------------
+		if(root == null)
+			return 0;
+			
+2) root -> 1 : diameter(root)
+---------------------------------------------
+	diameter(Node(1))
+	-----------------------------------------
+		if(root == null) : false
+		int leftSubtreeHeight = height(root.left) => height(null) => 0
+		int rightSubtreeHeight = 0
+		
+		int leftSubtreeDiameter = diameter(null) => 0
+		int rightSubtreeDiameter = 0
+		
+		return Math.max(leftSubtreeHeight + rightSubtreeHeight + 1, Math.max(leftSubtreeDiameter, rightSubtreeDiameter));
+		=> return Math.max(0 + 0 + 1, Math.max(0 , 0));
+		=> return Math.max(1, 0)
+		=> return 1;
