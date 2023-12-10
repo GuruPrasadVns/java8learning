@@ -1,0 +1,71 @@
+1) head = null 
+
+addAtIndex(-1, 1)
+---------------------------------------------------------------------------
+	if(index < 0) throw new IllegalArgumentExcpetion("Invalid Index");
+	
+addAtIndex(0, 1)
+---------------------------------------------------------------------------
+	if(head == null && index == 0)
+		head = new Node(key);
+		return;
+		
+
+		
+2) head -> 1
+
+addAtIndex(-1,2) : handled
+------------------------------------------------------------------------------
+
+addAtIndex(0, 2)
+------------------------------------------------------------------------------
+	if(head != null && index = 0){
+		node = new Node(key);
+		node.next = head;
+		head = node;
+		return;
+	}
+	
+addAtIndex(1, 2); head -> 1 -> null
+------------------------------------------------------------------------------
+	Node current = head;
+	Node previous = null;
+	int currentIndex = 0;
+	
+	while(current != null){
+		previous = current;
+		current = current.next;
+		currentIndex++;
+	}
+	
+	a) while(true)
+	----------------------------
+		previous -> head
+		current -> null
+		currentIndex = 1;
+		
+	if(current == null && index == currentIndex)
+		previous.next = node;
+		return;
+		
+addAtIndex(2, 2); head -> 1 -> null
+------------------------------------------------------------------------------
+
+	while(current != null) : true
+	-----------------------------------
+		previous -> head
+		current -> null
+		currentIndex = 1
+	
+	
+	
+	
+
+
+
+
+
+
+
+		
+
