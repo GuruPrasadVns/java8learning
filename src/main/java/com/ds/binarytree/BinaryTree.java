@@ -1,5 +1,7 @@
 package com.ds.binarytree;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 class Node{
@@ -114,6 +116,114 @@ public class BinaryTree {
 		int rightSubTreeDiameter = diameter(root.right);
 		
 		return Math.max(leftSubTreeHeight + rightSubTreeHeight + 1, Math.max(leftSubTreeDiameter, rightSubTreeDiameter));
+	}
+	
+	public void insertionInLevelOrder(int key) {
+		
+		if(root == null) {
+			root = new Node(key);
+			return;
+		}
+		
+		Queue<Node> queue = new LinkedList<>();
+		queue.add(root);
+		Node current = null;
+		
+		while(!queue.isEmpty()) {
+			current = queue.poll();
+			
+			if(current.left == null) {
+				current.left = new Node(key);
+				break;
+			}else {
+				queue.add(current.left);
+			}
+			
+			if(current.right == null) {
+				current.right = new Node(key);
+				break;
+			}else {
+				queue.add(current.right);
+			}
+		}
+	}
+	
+	public void delete(int key) {
+		
+		if(root == null)
+			return;
+		
+		if(root.left == null && root.right == null) {
+				
+				if(root.data == key) {
+					root = null;
+				}
+				
+				return;
+		}
+		
+		Queue<Node> queue = new LinkedList<>();
+		Node current = root;
+		queue.add(current);
+		Node delNode = null;
+		Node temp = null;
+		
+		while(!queue.isEmpty()) {
+			temp = queue.poll();
+			
+			if(temp.data == key) {
+				delNode = temp;
+			}
+			
+			if(temp.left != null) {
+				queue.add(temp);
+			}
+			
+			if(temp.right != null) {
+				queue.add(temp.right);
+			}
+		}
+		
+		if(delNode != null) {
+			int x = temp.data;
+			deleteDeepest(root, temp);
+			delNode.data = x;
+		}
+	}
+
+
+	private void deleteDeepest(Node root, Node deepestNode) {
+		Queue<Node> queue = new LinkedList<>();
+		queue.add(root);
+		Node temp = null;
+		
+		while(!queue.isEmpty()) {
+			temp = queue.poll();
+			
+			if(temp == deepestNode) {
+				temp = null;
+				return;
+			}
+			
+			if(temp.right != null) {
+				if(temp.right == deepestNode) {
+					temp.right = null;
+					return;
+				}else {
+					queue.add(temp.right);
+				}
+			}
+			
+			if(temp.left != null) {
+				if(temp.left == deepestNode) {
+					temp.left = null;
+					return;
+				}else {
+					queue.add(temp.left);
+				}
+			}
+		}
+		
 	}
 
 }

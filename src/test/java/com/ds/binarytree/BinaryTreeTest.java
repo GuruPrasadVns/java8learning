@@ -185,5 +185,36 @@ public class BinaryTreeTest {
 		
 		assertEquals(9, tree.diameter(tree.root));
 	}
+	
+	@Test
+	public void insertionInLevelOrderTest() {
+		BinaryTree binaryTree = new BinaryTree();
+		
+		binaryTree.insertionInLevelOrder(1);
+		
+		binaryTree.insertionInLevelOrder(2);
+		binaryTree.insertionInLevelOrder(3);
+		
+		binaryTree.insertionInLevelOrder(4);
+		binaryTree.insertionInLevelOrder(5);
+		binaryTree.insertionInLevelOrder(6);
+		binaryTree.insertionInLevelOrder(7);
+		
+		binaryTree.insertionInLevelOrder(8);
+		binaryTree.insertionInLevelOrder(9);
+		binaryTree.insertionInLevelOrder(10);
+		binaryTree.insertionInLevelOrder(11);
+		
+		binaryTree.levelOrder();
+		
+		assertEquals(4, binaryTree.height(binaryTree.root));
+	}
+	
+	
+	@Test
+	public void deleteTest() {
+		BinaryTree binaryTree = new BinaryTree();
+		assertNull(binaryTree.root);
+	}
 
 }
