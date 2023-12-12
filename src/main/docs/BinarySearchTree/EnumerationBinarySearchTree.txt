@@ -1,0 +1,3 @@
+The number of Binary Search Trees (BST) with n nodes is also the same as the number of unlabelled trees. The reason 
+for this is simple, in BST also we can make any key a root, If the root is i’th key in sorted order, then i-1 keys 
+can go on one side, and (n-i) keys can go on another side. 

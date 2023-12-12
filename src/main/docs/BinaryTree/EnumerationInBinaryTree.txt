@@ -1,0 +1,74 @@
+A Binary Tree is labeled if every node is assigned a label and a Binary Tree is unlabelled if nodes are not assigned 
+any label. 
+
+Below two are considered same unlabelled trees
+    o                 o
+  /   \             /   \ 
+ o     o           o     o 
+
+Below two are considered different labelled trees
+    A                C
+  /   \             /  \ 
+ B     C           A    B 
+ 
+ How many different Unlabelled Binary Trees can be there with n nodes? 
+ ----------------------------------------------------------------------------
+ 
+ For n  = 1, there is only one tree
+   o
+
+For n  = 2, there are two trees
+   o      o
+  /        \  
+ o          o
+ 
+ For n  = 3, there are five trees
+    o      o           o         o      o
+   /        \         /  \      /         \
+  o          o       o    o     o          o
+ /            \                  \        /
+o              o                  o      o
+
+
+For example, let T(n) be count for n nodes.
+T(0) = 1  [There is only 1 empty tree]
+T(1) = 1
+T(2) = 2
+
+T(3) =  T(0)*T(2) + T(1)*T(1) + T(2)*T(0) = 1*2 + 1*1 + 2*1 = 5
+
+T(4) =  T(0)*T(3) + T(1)*T(2) + T(2)*T(1) + T(3)*T(0)
+     =  1*5 + 1*2 + 2*1 + 5*1 
+     =  14 
+     
+T(5) = T(0) * T(4) + T(1) * T(3) + T(2) * T(2) + T(3) * T(1) + T(4) * T(0)
+	 = 1 * 14 + 1 * 5 + 2 * 2 + 5 * 1 + 14 * 1
+	 = 14 + 5 + 4 + 5 + 14
+	 = 42
+	 
+The above pattern basically represents n’th Catalan Numbers. First few Catalan numbers are 1 1 2 5 14 42 132 429 
+1430 4862,… 
+
+n’th Catalan Number can also be evaluated using the direct formula. 
+
+T(n) = (2n)! / (n+1)!n!
+
+e.g. T(5) = (2*5)!/ (5+1)! 5!
+		  = 10! / 6!5!
+		  = 10 * 9 * 8 * 7 / 5 * 4 * 3 * 2
+		  = 42
+     
+The idea is to consider all possible pairs of counts for nodes in left and right subtrees and multiply the counts 
+for a particular pair. Finally, add the results of all pairs. 
+
+
+How many labeled Binary Trees can be there with n nodes? 
+----------------------------------------------------------------------------
+
+To count labeled trees, we can use the above count for unlabelled trees. The idea is simple, every unlabelled tree 
+with n nodes can create n! different labeled trees by assigning different permutations of labels to all nodes.
+
+Number of Labelled Trees = (Number of unlabelled trees) * n!
+                       = [(2n)! / (n+1)!n!]  × n!
+                       
+For example for n = 3, there are 5 * 3! = 5*6 = 30 different labelled trees  
