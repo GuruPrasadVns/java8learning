@@ -2,6 +2,7 @@ package com.interfaces;
 
 public abstract class Duck {
     private FlyBehavior flyBehavior;
+    private QuackBehavior quackBehavior;
 
     public void quack(){
         System.out.println("Duck::quack");
@@ -15,6 +16,10 @@ public abstract class Duck {
         flyBehavior.fly();
     }
 
+    public void performQuack(){
+        quackBehavior.quack();
+    }
+
     public abstract void display();
 
     public FlyBehavior getFlyBehavior() {
@@ -23,5 +28,13 @@ public abstract class Duck {
 
     public void setFlyBehavior(FlyBehavior flyBehavior) {
         this.flyBehavior = flyBehavior;
+    }
+
+    public QuackBehavior getQuackBehavior() {
+        return quackBehavior;
+    }
+
+    public void setQuackBehavior(QuackBehavior quackBehavior) {
+        this.quackBehavior = quackBehavior;
     }
 }
