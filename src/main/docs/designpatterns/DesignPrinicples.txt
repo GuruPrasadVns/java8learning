@@ -1,0 +1,16 @@
+First Design Principle
+-----------------------------------------------------------------------------------------------------------------------
+    ->  Identify the aspects of your application that vary and separate them from what stay the same. Take what varies
+        and encapsulate them so it won't be affect rest of your code.
+    ->  Result ? Fewer unintended consequences from code changes and more flexibility in your systems.
+
+Second Design Principle
+-----------------------------------------------------------------------------------------------------------------------
+    ->  Program to an interface(behavior or supertype), not an implementation.
+
+Third Design Principle
+-----------------------------------------------------------------------------------------------------------------------
+    ->  Favor composition over inheritance.
+
+It lets you change behavior at run time.
+

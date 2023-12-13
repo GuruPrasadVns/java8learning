@@ -1,0 +1,149 @@
+public abstract class Duck {
+    public void quack(){
+        System.out.println("Duck::quack");
+    }
+
+    public void swim(){
+        System.out.println("Duck::swim");
+    }
+
+    public abstract void display();
+
+}
+
+********************************************************************************************************************
+
+package com.classes;
+
+import com.interfaces.Duck;
+
+public class MallardDuck extends Duck {
+
+    @Override
+    public void display() {
+        System.out.println("MallardDuck::display");
+    }
+}
+
+
+********************************************************************************************************************
+
+public class ReadHeadDuck extends Duck {
+    @Override
+    public void display() {
+        System.out.println("ReadHeadDuck::display");
+    }
+}
+
+********************************************************************************************************************
+
+Now we want to add fly behavior to some of the specific Duck classes.
+
+1) Add abstract fly() method in Duck abstract class so that every subclass would automatically inherit that.
+
+Problem
+----------------------------
+    -> Not all the subclasses should fly.
+    ->  Inheritance is a good tool in terms of reuse but not in case of maintenance.
+
+Disadvantages of Using Inheritance
+----------------------------------------------
+    -> Code is duplicated accross subclasses.
+    -> Runtime bhaviour changes are difficult.
+    -> Changes are unintentionally affect other classes.
+
+2) Add Interface Flyable
+
+public interface Flyable {
+    void fly();
+}
+
+public class MallardDuck extends Duck implements Flyable {
+
+    @Override
+    public void display() {
+        System.out.println("MallardDuck::display");
+    }
+
+    @Override
+    public void fly() {
+        System.out.println("MallardDuck::fly");
+    }
+}
+
+Problem
+--------------------------------------------
+    ->  Suppose we want to change fly behavior then you need to change individually classes which implements the fly
+        method.
+    -> So it completely destroys the code reuses. So, it creates a maintenance nightmare.
+    --> If flying behavior of different types then it is also very difficult to maintain.
+
+    After applying first and second design principle.
+
+    public interface FlyBehavior {
+            void fly();
+        }
+
+    public class FlyWithWings implements FlyBehavior {
+        @Override
+        public void fly() {
+            System.out.println("FlyWithWings::fly");
+        }
+    }
+
+    public class FlyNoWay implements FlyBehavior {
+        @Override
+        public void fly() {
+            System.out.println("FlyNoWay::fly");
+        }
+    }
+
+  Advantages
+  --------------------------------------------
+    ->  With this design, other type of objects can reuse our fly behavior because these behaviors are not hidden
+        away in our duck classes.
+
+    -> We can add new behaviors without modifying any of our existing classes.
+
+
+Integration with Duck App
+-----------------------------------------------------------------------------------------------------------------------
+public abstract class Duck {
+    private FlyBehavior flyBehavior;
+
+    public void quack(){
+        System.out.println("Duck::quack");
+    }
+
+    public void swim(){
+        System.out.println("Duck::swim");
+    }
+
+    public void performFly(){
+        flyBehavior.fly();
+    }
+
+    public abstract void display();
+
+    public FlyBehavior getFlyBehavior() {
+        return flyBehavior;
+    }
+
+    public void setFlyBehavior(FlyBehavior flyBehavior) {
+        this.flyBehavior = flyBehavior;
+    }
+}
+
+    public class StrategyDesignPatternExample {
+        public static void main(String[] args) {
+            MallardDuck duck = new MallardDuck();
+            duck.setFlyBehavior(new FlyWithWings());
+            // changing flying behavior at run time.
+            duck.setFlyBehavior(new FlyNoWay());
+            duck.quack();
+            duck.display();
+            duck.performFly();
+        }
+    }
+
+
