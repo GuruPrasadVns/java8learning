@@ -75,4 +75,20 @@ public class LinkedListTest {
 		list.print();
 	}
 
+	@Test
+	public void getTest(){
+		LinkedList list = new LinkedList();
+		assertEquals(Integer.MIN_VALUE, list.get(0));
+
+		list.addAtIndex(0, 1);
+		assertEquals(1, list.get(0));
+		assertEquals(Integer.MIN_VALUE, list.get(1));
+
+		list.addAtIndex(1,2);
+		assertEquals(1, list.get(0));
+		assertEquals(2, list.get(1));
+		assertEquals(Integer.MIN_VALUE, list.get(2));
+		assertEquals(Integer.MIN_VALUE, list.get(3));
+	}
+
 }

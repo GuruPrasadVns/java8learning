@@ -119,4 +119,25 @@ public class LinkedList {
 		System.out.print(head.data + " ");
 	}
 
+	public int get(int index){
+		if(index < 0)
+			throw new IllegalArgumentException("Index cannot be negative");
+
+		if(head == null)
+			return Integer.MIN_VALUE;
+
+		Node current = head;
+		int currentIndex = 0;
+
+		while(current != null && currentIndex < index){
+			current = current.next;
+			currentIndex++;
+		}
+
+		if(current != null)
+			return current.data;
+
+		return Integer.MIN_VALUE;
+	}
+
 }

@@ -1,0 +1,29 @@
+1) head -> null; get(1)
+-------------------------------
+    if(head == null)
+        return Integer.MIN_VALUE;
+
+2) head -> null; get(-1)
+----------------------------------------
+    if(index < 0) throw new IllegalArgumentException
+
+3) head -> 1 ; get(0)
+---------------------------------------------
+    if(index == 0)
+        return head.data;
+
+4) head -> 1; get(1)
+-------------------------------------
+    Node current = head;
+    int currentIndex = 0;
+    while(current != null && currentIndex < index)
+        current= current.next;
+        currentIndex++;
+
+    if(current != null)
+        return current.data;
+
+    return Integer.MIN_VALUE;
+
+5) head -> 1 -> 2 , get(2)
+------------------------------------------
