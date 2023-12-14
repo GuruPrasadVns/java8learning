@@ -148,6 +148,7 @@ public class ArrayPrograms {
         return -1;
     }
 
+    
     public static int binarySearchRec(int[] arr, int low, int high, int searchKey){
         int mid = low + ( high - low )/ 2;
         if(searchKey == arr[mid])

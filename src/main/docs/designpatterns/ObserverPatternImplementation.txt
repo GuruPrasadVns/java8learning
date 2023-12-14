@@ -1,0 +1,44 @@
+Observer Pattern
+--------------------------------------------------------------------------------
+	-> It keeps objects aware when something they might care about happens.
+	-> Objects can even decide at runtime whether they want to be kept informed.
+	-> Observer pattern is one of the heavily used pattern in JDK and its incredibly useful.
+	
+
+Suppose we need to build next generation Internet based weather monitoring application which is based on Weather data
+object which tracks current weather conditions (temperature, humidity and barometric pressure).
+
+Initially we need to provide three display elements : current condition, weather statistics and a simple forecast, all
+updated in real-time as the Weather Data object acquires the most recent measurements.
+
+Furthermore, this is an expandable weather station. This application should have an API so that other developers can
+write their own display elements.
+
+*********************************************************************************************************************
+
+public void measurmentsChanged() {
+		float currentTemprature = getTemprature();
+		float currentPressure = getPressure();
+		float currentHumidity = getHumidity();
+		
+		CurrentConditionsDisplay currentConditionsDisplay = new CurrentConditionsDisplay();
+		currentConditionsDisplay.update(currentTemprature, currentPressure, currentHumidity);
+		
+		WeatherStatisticsDisplay weatherStatisticsDisplay = new WeatherStatisticsDisplay();
+		weatherStatisticsDisplay.update(currentTemprature, currentPressure, currentHumidity);
+		
+		ForeCastDisplay foreCastDisplay = new ForeCastDisplay();
+		foreCastDisplay.update(currentTemprature, currentPressure, currentHumidity);
+	}
+	
+*********************************************************************************************************************
+
+	Problems with the above code
+		-> We are coding to concrete classes not interfaces.
+		-> For every new display element we need to alter the code.
+		-> We have no way to add display elements at run time.
+		-> The display elements don't implements a common interface.
+		-> We haven't encapsulated the part that changes.
+		-> We are violating the encpasulation of weather data class.
+
+		

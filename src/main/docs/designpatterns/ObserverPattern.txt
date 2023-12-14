@@ -1,0 +1,22 @@
+Meet The Observer Pattern
+-------------------------------------------------------------------------------------------------------------------
+	You know how newspaper or magazine subscriptions work
+		->	A newspaper publisher goes into the business and begin publishing newspapers.
+		->	You subscribe to a particular publisher and every time there is a new edition of newspaper it gets
+			delivered to you. As long as you are the subscriber you get new newspaper.
+		->	When you don't want papers any more you unsubscribe and they stop the newspaper delivery.
+		->	While the publisher and other subscriber are remain in the business and they subscribe and unsubscribe
+			newspaper.
+	
+	Publisher + Subscriber    =     Observer Pattern
+	
+If you understand newspaper subscriptions, you pretty much understand the Observer Pattern, only we call publisher the
+SUBJECT and the subscriber the OBSERVERS.
+
+
+Definition
+-------------------------------------------------------------------------------------------------------------------
+The Observer pattern defines one to many dependency between a set of objects so that when one object changes state, 
+all of its dependents are notified and updated automatically.
+
+
