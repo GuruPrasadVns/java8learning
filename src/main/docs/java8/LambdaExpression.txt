@@ -1,0 +1,240 @@
+Lambdas in a nutshell
+-----------------------------------------------------------------------------------------------------------------
+A lambda expression can be understood as a concise representation of an anonymous function that can be passed around:
+it doesn’t have a name, but it has a list of parameters, a body, a return type, and also possibly a list of exceptions
+that can be thrown.
+
+That’s one big definition;let’s break it down:
+
+ Anonymous— We say anonymous because it doesn’t have an explicit name like a method would
+normally have: less to write and think about!
+ Function— We say function because a lambda isn’t associated with a particular class like a method is.
+But like a method, a lambda has a list of parameters, a body, a return type, and a possible list of
+exceptions that can be thrown.
+ Passed around— A lambda expression can be passed as argument to a method or stored in a
+variable.
+ Concise— You don’t need to write a lot of boilerplate like you do for anonymous classes.
+
+If you’re wondering where the term lambda comes from, it originates from a system developed in academia called lambda
+calculus, which is used to describe computations.
+
+Which of the following are not valid lambda expressions?
+1. () -> {}
+2. () -> "Raoul"
+3. () -> {return "Mario";}
+4. (Integer i) -> return "Alan" + i;
+5. (String s) -> {"Iron Man";}
+
+Where and how to use lambdas
+-----------------------------------------------------------------------------------------------------------------
+You can use a lambda expression in the context of a functional interface.
+
+lambda expression can be assigned to a variable or passed to a method expecting a functional interface as argument,
+provided the lambda expression has the same signature as the abstract method of the functional interface.
+
+Functional interface
+-----------------------------------------------------------------------------------------------------------------
+A functional interface is an interface that specifies exactly one abstract method.
+e.g.
+java.util.Comparator
+public interface Comparator<T>{
+    int compare(T o1, T o2);
+}
+
+java.lang.Runnable
+public interface Runnable{
+    void run();
+}
+
+** An interface is still a functional interface if it has many default methods as long as it specifies only one
+abstract method.
+
+Which of these interfaces are functional interfaces?
+    public interface Adder{
+    int add(int a, int b);
+    }
+
+    public interface SmartAdder extends Adder{
+    int add(double a, double b);
+    }
+
+    public interface Nothing{
+    }
+
+Lambda expressions let you provide the implementation of the abstract method of a functional interface directly inline
+and treat the whole expression as an instance of a functional interface (more technically speaking, an instance of a
+concrete implementation of the functional interface).
+
+Function descriptor
+-----------------------------------------------------------------------------------------------------------------
+The signature of the abstract method of the functional interface essentially describes the signature of the lambda
+expression. We call this abstract method a function descriptor.
+
+Table 3.2. Common functional interfaces in Java 8
+-----------------------------------------------------------------------------------------------------------------
+
+Functional Interface                            Function Descriptor                         Primitive Specialization
+
+Predicate<T>                                       T -> boolean              IntPredicate,LongPredicate,DoublePredicate
+Consumer<T>                                        T -> void                 IntConsumer, LongConsumer, DoubleConsumer
+Function<T,R>                                      T -> R            IntFunction<R>, LongFunction<R>, DoubleFunction<R>,
+                                                                 ToIntFunction<T>,ToDoubleFunction<T>,ToLongFunction<T>,
+                                                              IntToDoubleFunction, IntToLongFunction, LongToIntFunction,
+                                                              LongToDoubleFunction
+Supplier<T>                                       () -> T     BooleanSupplier, IntSupplier, LongSupplier, DoubleSupplier
+UnaryOperator<T>                                   T -> T     IntUnaryOperator, LongUnaryOperator, DoubleUnaryOperator
+BinaryOperator<T>                                (T, T) -> T IntBinaryOperator, LongBinaryOperator, DoubleBinaryOperator
+BiPredicate<L,R>                              (L, R) ->boolean
+BiConsumer<T,U>                                (T, U) -> void  ObjIntConsumer<T>,ObjLongConsumer<T>,ObjDoubleConsumer<T>
+BiFunction<T, U, R>                            (T, U) -> R   ToIntBiFunction<T,U>, ToLongBiFunction<T,U>,
+                                                              ToDoubleBiFunction<T,U>
+
+Which of the following are valid uses of lambda expressions?
+1.
+execute(() -> {});
+public void execute(Runnable r){
+r.run();
+}
+2.
+public Callable<String> fetch() {
+return () -> "Tricky example ;-)";
+}
+3. Predicate<Apple> p = (Apple a) -> a.getWeight();
+
+What about @FunctionalInterface?
+-----------------------------------------------------------------------------------------------------------------
+This annotation is used to indicate that the interface is intended to be a functional interface. The compiler will
+return a meaningful error if you define an interface using the @FunctionalInterface annotation and it isn’t a
+functional interface.
+
+Putting lambdas into practice: the execute around pattern
+-----------------------------------------------------------------------------------------------------------------
+A recurrent pattern in resource processing (for example, dealing with files or databases) is to open a resource, do some
+processing on it, and then close the resource. The setup and cleanup phases are always similar and surround the
+important code doing the processing. This is called the execute around pattern.
+
+public static String processFile() throws IOException{
+    try(BufferedReader br = new BufferedReader(new FileReader("data.txt"))){
+            return br.readLine();
+    }
+}
+
+This current code is limited. You can read only the first line of the file. What if you’d like to return the first two
+lines instead or even the word used most frequently?Ideally, you’d like to reuse the code doing setup and cleanup and
+tell the processFile method to perform different actions on the file.
+
+Predicate Functional Interface
+-----------------------------------------------------------------------------------------------------------------
+@FunctionalInterface
+public interface Predicate<T>{
+boolean test(T t);
+}
+
+public static List<String> processStringUsingPredicate(List<String> strings, Predicate<String> predicate){
+        List<String> result = new ArrayList<>();
+        for(String string: strings){
+            if(predicate.test(string))
+                result.add(string);
+        }
+
+        return result;
+}
+
+@Test
+public void predicateTest(){
+		List<String> strings = Arrays.asList(
+				"Guru Prasad Pandey",
+				"Shree Krishna Pandey",
+				"Sandhya Pandey",
+				"Nitya Pandey",
+				"Shweta Tripathi"
+		);
+
+		List<String> stringStartsWithS = Java8Utiltiy.processStringUsingPredicate(strings, s -> s.startsWith("S"));
+		System.out.println(stringStartsWithS);
+}
+
+Consumer Functional Interface
+-----------------------------------------------------------------------------------------------------------------
+@FunctionalInterface
+public interface Consumer<T>{
+    void accept(T t);
+}
+
+public static void printStringUsingConsumer(List<String> strings, Consumer<String> consumer){
+        for(String string : strings)
+            consumer.accept(string);
+}
+
+@Test
+public void consumerTest(){
+		List<String> strings = Arrays.asList(
+				"Guru Prasad Pandey",
+				"Shree Krishna Pandey",
+				"Sandhya Pandey",
+				"Nitya Pandey",
+				"Shweta Tripathi"
+		);
+
+		Java8Utiltiy.printStringUsingConsumer(strings, s -> System.out.println(s + " " +s.length()));
+}
+
+Function functional Interface
+-----------------------------------------------------------------------------------------------------------------
+@FunctionalInterface
+public interface Function<T,R>{
+    R apply(T t);
+}
+
+public static List<Integer> processStringsUsingFunction(List<String> strings, Function<String, Integer> function){
+        List<Integer> result = new ArrayList<>();
+        for(String string : strings){
+            result.add(function.apply(string));
+        }
+        return result;
+}
+
+@Test
+public void functionTest(){
+		List<String> strings = Arrays.asList(
+				"Guru Prasad Pandey",
+				"Shree Krishna Pandey",
+				"Sandhya Pandey",
+				"Nitya Pandey",
+				"Shweta Tripathi"
+		);
+		List<Integer> stringLengthsList = Java8Utiltiy.processStringsUsingFunction(strings, s -> s.length());
+		System.out.println(stringLengthsList);
+}
+
+Primitive specializations
+-----------------------------------------------------------------------------------------------------------------
+There are also functional interfaces that are specialized with certain types.
+
+To refresh a little: every Java type is either a reference type (for example, Byte, Integer, Object,List) or a
+primitive type (for example, int, double, byte, char). But generic parameters (for example, the T in Consumer<T>) can
+be bound only to reference types. This is due to how generics are internally implemented.
+
+As a result, in Java there’s a mechanism to convert a primitive type into a corresponding reference type. This
+mechanism is called boxing. The opposite approach (that is, converting a reference type into a corresponding
+primitive type) is called unboxing.
+
+Java also has an autoboxing mechanism to facilitate the task for programmers: boxing and unboxing operations are done
+automatically.
+
+For example, the following code will work due to autoboxing
+
+List<Integer> list = new ArrayList<>();
+for (int i = 300; i < 400; i++){
+list.add(i);
+}
+
+But this comes with a performance cost. Boxed values are essentially a wrapper around primitive types and are stored
+on the heap. Therefore, boxed values use more memory and require additional memory lookups to fetch the wrapped
+primitive value.
+
+Java 8 brings a specialized version of the functional interfaces we described earlier in order to avoid autoboxing
+operations when the inputs or outputs are primitives.
+
+For example, in the following code, using an IntPredicate avoids a boxing operation of the value 1000, whereas
+using a Predicate<Integer> would box the argument 1000 to an Integer object:
