@@ -1,0 +1,59 @@
+class Node{
+    int data;
+    Node left;
+    Node right;
+
+    Node(int data){
+        this.data = data;
+        this.left = null;
+        this.right = null;
+    }
+}
+
+public class BinaryTree{
+    Node root;
+
+    public BinaryTree(){
+        this.root = null;
+    }
+
+    public int heightRec(Node root){
+        if(root == null) return 0;
+
+        int leftSubTreeHeight =  height(root.left);
+        int rightSubTreeHeight =  height(root.right);
+
+        return Math.max(leftSubTreeHeight, rightSubTreeHeight) + 1;
+    }
+
+    public void levelOrder(){
+        int height = heightRec(root);
+        for(int i = 1; i <= height; i++)
+            printCurrentLevel(root, i);
+    }
+
+    private void printCurrentLevel(Node root, int level){
+        if(root == null)
+            return;
+        if(level == 1){
+            print (root.data+ " ");
+        }else if(level > 1){
+            printCurrentLevel(root.left, level - 1);
+            printCurrentLevel(root.right, level - 1);
+        }
+    }
+
+    public void inorder(Node root){
+        if(root == null)
+            return;
+
+        inorder(root.left);
+        print(root.data + " ");
+        inorder(root.right);
+    }
+
+    // preorder : root left right
+    // postorder : left right root
+
+
+}

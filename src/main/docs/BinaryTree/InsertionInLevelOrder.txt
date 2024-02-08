@@ -1,0 +1,66 @@
+public void insertInLevelOrder(int key){
+    if(root == null){
+        root = new Node(key);
+        return;
+    }
+
+    Queue<Node> queue = new LinkedList<>();
+    queue.add(root);
+    Node current = null;
+
+    while(!queue.isEmpty()){
+        current = queue.poll();
+
+        if(current.left == null){
+            current.left = new Node(key);
+            break;
+        }else{
+            queue.add(current.left);
+        }
+
+        if(current.right == null){
+            current.right = new Node(key);
+            break;
+        }else{
+             queue.add(current.right);
+        }
+    }
+}
+
+
+                1
+
+            2       3
+
+        4
+
+
+insertInLevelOrder(5)
+------------------------------------------------------
+    if(root == null) : false
+    queue.add(Node(1));
+    current = null;
+
+    while : true
+    ------------------------------------------------------
+        current = Node(1); queue -> empty
+        if(current.left == null) : false
+        else
+            queue.add(Node(2)); => queue -> 2
+        if(current.right == null) : false
+        else
+            queue.add(Node(3)); => queue -> 2 3
+
+    while: true
+    ---------------------------------------------------------------
+        current = Node(2); queue -> Node(3)
+        if(current.left == null) : false
+        queue.add(Node(4)); => queue -> Node(3), Node(4)
+        if(current.right == null) : true
+        ------------------------------------------
+            current.right = new Node(5); =>
+                                1
+
+                            2       3
+
+                        4       5

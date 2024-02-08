@@ -1,0 +1,52 @@
+			1
+
+		2		3
+
+	4
+
+public void levelOrder(){
+	int height = heightRec(root);
+
+	for(int i = 1 ; i <= height ; i++)
+		printCurrentLevel(i, root);
+}
+
+private void printCurrentLevel(int level, Node root){
+	if(root == null)
+		return;
+
+	if(level == 1)
+		System.out.print(root.data)
+	else if(level > 1){
+		printCurrentLevel(level - 1, root.left)
+		printCurrentLevel(level - 1, root.right)
+	}
+
+}
+
+levelOrder()
+-----------------------------------------------
+	height = 3
+	for loop : i =1 i <= 3(true)
+	----------------------------------
+		printCurrentLevel(1,Node(1))
+		---------------------------------
+			if(level == 1) : true
+				output : 1
+
+	i = 2 i <= 3 (true)
+	---------------------------------------
+		printCurrentLevel(2,Node(1)
+		-----------------------------------
+			level > 1 (true)
+			-------------------------------
+				printCurrentLevel(1, Node(2))
+				--------------------------------
+					output : 1 2
+				printCurrentLevel(1, Node(3))
+				------------------------------------
+					output : 1 2 3
+
+	i = 3 (true)
+	---------------------------------------------------
+		printCurrentLevel(3, 1)

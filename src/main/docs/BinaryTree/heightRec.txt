@@ -1,0 +1,35 @@
+			1
+
+		2		3
+
+	4
+
+int height(Node root){
+	if(root == null) return 0;
+	int leftTreeHeight = height(root.left);
+	int rightTreeHeight = height(root.right);
+
+	return Math.max(leftTreeHeight, rightTreeHeight) + 1;
+}
+
+dry run
+--------------------------
+height(1)
+-------------------------------
+	leftTreeHeight = height(2) = 2
+	rightTreeHeight = height(3) = 1
+	return 3
+	height(2)
+	----------------------------
+		leftTreeHeight = height(4) = 1
+		rightTreeHeight = height(null) = 0
+		return 2
+		height(4)
+		---------------------------
+			int leftTreeHeight = height(null) = 0
+			int rightTreeHeight = height(null) = 0
+			return 1
+			height(null)
+			-----------------------------
+				return 0
+

@@ -1,0 +1,178 @@
+public void delete(int key){
+    if(root == null)
+        return;
+
+    if(root.left == null && root.right == null){
+        if(root.data == key){
+            root = null;
+        }
+
+        return;
+    }
+
+    Queue<Node> queue = new LinkedList<>();
+    Node current = root;
+    queue.add(current);
+    Node delNode = null;
+    Node temp = null;
+
+    while(!queue.isEmpty()){
+        temp = queue.poll();
+
+        if(temp.data == key){
+            delNode = temp;
+        }
+
+        if(temp.left != null){
+            queue.add(temp.left);
+        }
+
+        if(temp.right != null){
+            queue.add(temp.right);
+        }
+    }
+
+    if(delNode != null){
+        int x = temp.data;
+        deleteDeepest(root, temp);
+        delNode.data = x;
+    }
+}
+
+private void deleteDeepest(Node root, Node deepestNode){
+    Queueu<Node> queue = new LinkedList<>();
+    queue.add(root);
+    Node temp = null;
+
+    while(!queue.isEmpty()){
+        temp = queue.poll();
+
+        if(temp == deepestNode){
+            temp = null;
+            return;
+        }
+
+        if(temp.right != null){
+            if(temp.right == deepestNode){
+                temp.right = null;
+                return;
+            }else{
+                queue.add(temp.right);
+            }
+        }
+
+        if(temp.left != null){
+            if(temp.left == deepestNode){
+                temp.left = null;
+                return;
+            }else{
+                queue.add(temp.left);
+            }
+        }
+    }
+}
+
+
+1)                1
+
+           2             3
+
+       4       5      6     7
+
+
+delete(1)
+---------------------------------------------------------------
+    if(root == null) : false
+    if(root.left == null && root.right == null) : false
+
+    queue -> empty
+    current -> Node(1)
+    queue.add(currnt); => queue -> Node(1)
+    Node delNode = null;
+    Node temp = null;
+
+    while(!queue.isEmpty()) : true
+    ------------------------------------------------
+        temp = queue.poll() => temp -> Node(1); queue -> empty
+
+        if(temp.data == key) : true
+        --------------------------------------------
+            delNode = temp => delNode -> Node(1)
+
+        if(temp.left != null) : true
+        --------------------------------------------
+            queue.add(temp.left) => queue -> Node(2)
+
+        if(temp.right != null) : true
+        ---------------------------------------------------------------------
+            queue.add(temp.right) => queue -> Node(2), Node(3)
+
+    while : true
+    ---------------------------------------------------------------------------------
+        temp = queue.poll() => temp -> Node(2); queue -> Node(3)
+
+        if(temp.data == key) : false
+        if(temp.left != null) : true
+        -----------------------------------------------------------
+            queue.add(Node(4)) => queue -> Node(3), Node(4)
+
+        if(temp.right != null) : true
+        -------------------------------------------------------------
+            queue -> Node(3), Node(4), Node(5)
+
+
+    while : true
+    ---------------------------------------------------------------------------------
+        temp = queue.poll() => temp -> Node(3); queue -> Node(4), Node(5)
+        if(temp.data == key) : false
+
+        if(temp.left != null) : true
+        -----------------------------------------------------------
+            queue.add(Node(6)) => queue -> Node(4), Node(5), Node(6)
+
+        if(temp.left != null) : true
+        -----------------------------------------------------------
+            queue.add(Node(7)) => queue -> Node(4), Node(5), Node(6), Node(7)
+
+
+    while : true
+    ---------------------------------------------------------------------------------
+        temp = queue.poll() => temp -> Node(4); queue -> Node(5), Node(6), Node(7)
+
+        if(temp.data == key) : false
+        if(temp.left != null) : false
+        if(temp.right != null) : false
+
+    while : true
+    ---------------------------------------------------------------------------------
+            temp = queue.poll() => temp -> Node(5); queue -> Node(6), Node(7)
+
+            if(temp.data == key) : false
+            if(temp.left != null) : false
+            if(temp.right != null) : false
+
+    while : true
+    ---------------------------------------------------------------------------------
+                temp = queue.poll() => temp -> Node(6); queue -> Node(7)
+
+                if(temp.data == key) : false
+                if(temp.left != null) : false
+                if(temp.right != null) : false
+
+    while : true
+    ---------------------------------------------------------------------------------
+                    temp = queue.poll() => temp -> Node(7); queue -> empty
+
+                    if(temp.data == key) : false
+                    if(temp.left != null) : false
+                    if(temp.right != null) : false
+
+
+    while : false
+
+    if(delNode != null): true
+    ----------------------------------------------------------------------------------------------
+        int x = temp.data => int x = 7
+        deleteDeepest(1, 7)
+        -----------------------------------------------------------------------------------------------
+
