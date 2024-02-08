@@ -1,0 +1,75 @@
+int[] arr1 = {5, 5, 5}
+first = Integer.MIN_VALUE;
+second = Integer.MIN_VALUE;
+third = Integer.MIN_VALUE;
+n = 3
+
+for(i = 0; i < n; i++)
+i = 0 : true ; i < 3
+-----------------------------------------------------------------
+   if(first != arr[i] && second != arr[i] && third != arr[i]) : true
+   -------------------------------------------------------------------
+        if(arr[i] > first) : true
+        -----------------------------------------------
+            third = second => third = Integer.MIN_VALUE;
+            second = first => second =  Integer.MIN_VALUE;
+            first = arr[i] => first = 5
+
+        else if (arr[i] > second) : false
+        else if(arr[i] > third) : false
+
+
+i = 1; i < 3 => for loop true
+-----------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]): false
+
+i= 2 ; i < 3 => true
+-----------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]): false
+
+
+*************************************************************************************************************************
+int[] arr1 = {20, 10, 5, 2}
+first = Integer.MIN_VALUE;
+second = Integer.MIN_VALUE;
+third = Integer.MIN_VALUE;
+n = 4
+
+i = 0; i < 4 : true
+-----------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]) : true
+    -------------------------------------------------------------------
+        if(arr[i] > first) : true
+        -------------------------------------------------------------------
+            third = second => third = Integer.MIN_VALUE;
+            second = first => second = Integer.MIN_VALUE;
+            first = arr[i] => first = 20
+
+
+i = 1; i < 4 : true
+-----------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]) : true
+    -------------------------------------------------------------------
+        if(arr[i] > first) : false
+        else if (arr[i] > second) : true
+        -------------------------------------------------------------------
+            third = second => third = Integer.MIN_VALUE;
+            second = arr[i] => second = 10
+
+i = 2; i < 4 : true
+-----------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]) : true
+    -------------------------------------------------------------------
+        if(arr[i] > first) : false
+        else if (arr[i] > second) : false
+        else if(arr[i] > third): true
+        -------------------------------------------------------------------
+            third = arr[i] => third = 5
+
+i = 3; i < 4 : true
+----------------------------------------------------------------------
+    if(first != arr[i] && second != arr[i] && third != arr[i]) : true
+    ---------------------------------------------------------------------
+        if(arr[i] > first) : false
+        else if (arr[i] > second) : false
+        else if(arr[i] > third): false

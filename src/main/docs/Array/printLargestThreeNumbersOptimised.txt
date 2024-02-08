@@ -1,0 +1,48 @@
+public static void printLargestThreeNumbersOptimised(int[] arr){
+        Arrays.sort(arr); // sorted using tuned quicksort
+        int n = arr.length;
+        int check = 0;
+        int count = INTEGER.MIN_VALUE;
+
+        for(int i = 1; i <=n ; i++){
+            if(count < 4){
+                if(check != arr[n - i]){
+                    System.out.print(arr[n - i] + " ");
+                    check = arr[n - i];
+                    count++;
+                }
+            }
+            else
+                break;
+        }
+
+}
+
+int[] arr = {2, 10, 5, 20};
+Arrays.sort(arr); => arr = {2, 5, 10, 20}
+n = 4
+check = 0;
+count = INTEGER.MIN_VALUE
+
+for(i = 1; i <= n ; i++)
+-------------------------------------------
+
+i = 1; i <=4 : true
+--------------------------------------------
+    if(count < 4) : true
+    -------------------------------------------
+        if(check != arr[n - i]) => if(INTEGER.MIN_VALUE != arr[3]) => if(INTEGER.MIN_VALUE != 20): true
+        -----------------------------------------------------------------
+            print arr[n - i ] => output : 20
+            check = 20
+            count = 2
+
+
+i = 2; i <=4 : true
+--------------------------------------------
+     if(count < 4) : true
+     -----------------------------------------------------------
+        if(20 != 10): true
+        -------------------------------------------
+            output : 20 10
+            count = 3

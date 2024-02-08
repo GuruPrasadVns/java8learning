@@ -12,7 +12,7 @@ public class ArrayProgramsTest {
 //        int arr[] = { 12, 13, 1, 10, 34, 1 };
 //        ArrayPrograms.printLargestThreeElements(arr);
 
-        int[] arr1 = { 12, 45, 1, -1, 45, 54, 23, 5, 0, -10 };
+        int[] arr1 = { 12, 45, 1, -1, 45, 54, 23, 5, 0, -10, 54, 54, 45, 45, 23, 23, 23, 23 };
         ArrayPrograms.printLargestThreeElements(arr1);
     }
 

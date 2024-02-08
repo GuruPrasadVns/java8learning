@@ -35,9 +35,6 @@ public class ArrayPrograms {
                     third = arr[i];
                 }
             }
-
-
-
         }
         System.out.println("The Three Largest Elements are :" + first + " , " + second + " , " + third);
     }

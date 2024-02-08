@@ -1,0 +1,102 @@
+public static int findSecondLargest(int[] arr){
+    int n = arr.length;
+    int max = Integer.MIN_VALUE;
+    int secondMax = Integer.MIN_VALUE;
+
+    for(int i = 0; i < n ; i++){
+        if(max != arr[i] && secondMax != arr[i]){
+            if(arr[i] > max){
+                secondMax = max;
+                max = arr[i];
+            }
+            if(arr[i] > secondMax){
+                secondMax = arr[i];
+            }
+        }
+    }
+
+    return secondMax;
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+public static int findSecondLargestUsingSorting(int[] arr){
+    int n = arr.length;
+    Arrays.sort(arr);
+
+    for(int i = n -2; i >= 0; i++){
+        if(arr[i] != arr[n - 1])
+            return arr[i];
+    }
+
+    return Integer.MIN_VALUE;
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+public static void printLargestThreeElements(int[] arr){
+    int n = arr.length;
+    int max = Integer.MIN_VALUE;
+    int secondMax = Integer.MIN_VALUE;
+    int thirdMax = Integer.MIN_VALUE;
+
+    for(int i = 0; i < n ; i++){
+        if(arr[i] != max && arr[i] != secondMax && arr[i] != thirdMax){
+            if(arr[i] > max){
+                thirdMax = secondMax;
+                secondMax = max;
+                max = arr[i];
+            }
+            if(arr[i] > secondMax){
+                thirdMax = secondMax;
+                secondMax = arr[i];
+            }
+            if(arr[i] > thirdMax){
+                thirdMax = arr[i];
+            }
+        }
+    }
+
+    Print(max, secondMax, thirdMax);
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+** Important
+
+public static void printLargestThreeElements(int[] arr){
+    int n = arr.length;
+    int check = Integer.MIN_VALUE;
+    int count = 1;
+
+    Arrays.sort(arr);
+
+    for(int i = 1; i <= n ; i++){
+        if(count < 4){
+            if(check != arr[n - i]){
+                print(arr[n - i])
+                check = arr[n - i];
+                count++;
+            }
+        }else{
+            break;
+        }
+    }
+}
+
+-----------------------------------------------------------------------------------------------------------------------
+
+public static void pushZerosToEnd(int[] arr){
+    int n = arr.length;
+    int count = 0;
+
+    for(int i = 0; i < n; i++){
+        if(arr[i] != 0){
+            arr[count++] = arr[i];
+        }
+    }
+
+    while(count < n){
+        arr[count++] = 0;
+    }
+}
+
