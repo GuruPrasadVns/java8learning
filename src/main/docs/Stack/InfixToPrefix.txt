@@ -1,0 +1,49 @@
+exp : A*B+C/D
+output : +*AB/CD
+-------------------------------------------------------------------------------
+1. Reverse the infix expression and while reversing ( becomes ) and vice versa.
+    D/C+B*A
+2. Convert the reversed infix expression to postfix expression but instead of popping operators greater than or equal
+to current operator precedance we will pop only those operators which has greater precedance.
+
+a) D => output : 'D' , stack -> empty
+b) / => output : 'D' , stack -> /
+c) C => output : 'DC' , stack -> /
+d) + => output : 'DC/' , stack -> +
+e) B => output : 'DC/B' , stack -> +
+f) * => output : 'DC/B' , stack -> * +
+g) A => output : 'DC/BA' , stack -> * +
+
+since stack is non empty
+h) output = 'DC/BA*+'
+
+Now reverse the postfix exp : '+*AB/CD'
+
+
+*****************************************************************************************************************
+exp : (A–B/C)*(A/K-L)
+result : *-A/BC-/AKL
+-------------------------------------------------------------
+1. Reverse => (L-K/A)*(C/B-A)
+2.
+    a) ( => output : ''; stack -> (
+    b) L => output : 'L'; stack -> (
+    c) - => output : 'L'; stack -> - (
+    d) K => output : 'LK'; stack -> - (
+    e) / => output : 'LK'; stack -> / - (
+    f) A => output : 'LKA'; stack -> / - (
+    g) ) => output : 'LKA/-'; stack -> empty
+    h) * => output : 'LKA/-'; stack -> *
+    i) ( => output : 'LKA/-'; stack -> ( *
+    j) C => output : 'LKA/-C'; stack -> ( *
+    k) / => output : 'LKA/-C'; stack -> / ( *
+    l) B => output : 'LKA/-CB'; stack -> / ( *
+    m) - => output : 'LKA/-CB/'; stack -> - ( *
+    n) A => output : 'LKA/-CB/A'; stack -> - ( *
+    o) ) => output : 'LKA/-CB/A-'; stack -> *
+
+    stack is non empty
+
+    output : 'LKA/-CB/A-*'
+
+    reverse : '*-A/BC-/AKL'

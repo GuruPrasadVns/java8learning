@@ -1,0 +1,106 @@
+exp : A+B*C+D
+output : ABC*+D+
+---------------------------------------------------------------------------
+output = ''; stack -> empty
+
+1. A => output = 'A'; stack -> empty
+2. + => output = 'A'; stack -> +
+3. B => output = 'AB'; stack -> +
+4. * => output = 'AB'; stack -> * +
+5. C => output = 'ABC'; stack -> * +
+6. + => output = 'ABC*+'; stack -> +
+7. D => output = 'ABC*+D'; stack -> +
+
+while(!stack.isEmpty()): true
+-------------------------------------
+output = 'ABC*+D+'; stack -> empty
+
+Result = 'ABC*+D+'
+
+************************************************************************************************************
+
+exp : ((A+B)–C*(D/E))+F;
+output : 'AB+CDE/*-F+'
+---------------------------------------------------
+output = ''; stack -> empty
+
+1. ( => output = ''; stack -> (
+2. ( => output = ''; stack -> ( (
+3. A => output = 'A'; stack -> ( (
+4. + => output = 'A'; stak -> + ( (
+5. B => output = 'AB'; stack -> + ( (
+6. ) => output = 'AB+'; stack -> (
+7. - => output = 'AB+'; stack -> - (
+8. C => output = 'AB+C'; stack -> - (
+9. * => output = 'AB+C'; stack -> * - (
+10. ( => output = 'AB+C'; stack -> ( * - (
+11. D => output = 'AB+CD'; stack -> ( * - (
+11. / => output = 'AB+CD'; stack -> / ( * - (
+12. E => output = 'AB+CDE'; stack -> / ( * - (
+13. ) => output = 'AB+CDE/' ; stack -> * - (
+14. ) => output = 'AB+CDE/*-'; stack -> empty
+15  + => output = 'AB+CDE/*-'; stack -> +
+16. F => output = 'AB+CDE/*-F'; stack -> +
+
+while(!stack.isEmpty()) : true
+-------------------------------------
+17. output = 'AB+CDE/*-F+'; stack -> empty
+
+Result : 'AB+CDE/*-F+'
+
+************************************************************************************************************
+exp : a+b*(c^d-e)^(f+g*h)-i
+result = 'abcd^e-fgh*+^*+i-'
+---------------------------------------------------
+output = ''; stack -> empty
+
+1. a => output : 'a'; stack -> empty
+2. + => output : 'a'; stack -> +
+3. b => output : 'ab'; stack -> +
+4. * => output : 'ab'; stack -> * +
+5. ( => output : 'ab'; stack -> ( * +
+6. c => output : 'abc'; stack -> ( * +
+7. ^ => output : 'abc'; stack -> ^ ( * +
+8. d => output : 'abcd'; stack -> ^ ( * +
+9. - => output : 'abcd^'; stack-> - ( * +
+10. e => output : 'abcd^e'; stack -> - ( * +
+11. ) => output : 'abcd^e-'; stack -> * +
+12. ^ => output : 'abcd^e-'; stack -> ^ * +
+13. ( => output : 'abcd^e-'; stack -> ( ^ * +
+14. f => output : 'abcd^e-f'; stack -> ( ^ * +
+15. + => output : 'abcd^e-f'; stack -> + ( ^ * +
+16. g => output : 'abcd^e-fg'; stack -> + ( ^ * +
+17. * => output : 'abcd^e-fg'; stack -> * + ( ^ * +
+18. h => output : 'abcd^e-fgh'; stack -> * + ( ^ * +
+19. ) => output : 'abcd^e-fgh*+'; stack -> ^ * +
+20. - => output : 'abcd^e-fgh*+^*+'; stack -> -
+21. i => output : 'abcd^e-fgh*+^*+i'; stack -> -
+
+while stack is not empty
+22. output = 'abcd^e-fgh*+^*+i-'; stack -> empty
+
+
+************************************************************************************************************
+exp : (A-B)*[C/(D+E)+F]
+
+1. ( => stack -> (
+2. A => output -> 'A' ; stack -> (
+3. - => output -> 'A' ; stack -> - (
+4. B => output -> 'AB' ; stack -> - (
+5. ) => output -> 'AB-' ; stack -> empty
+6. * => output -> 'AB-' ; stack -> *
+7. [ => output -> 'AB-' ; stack -> [ *
+8. C => output -> 'AB-C' ; stack -> [ *
+9. / => output -> 'AB-C' ; stack -> / [ *
+10. ( => output -> 'AB-C' ; stack -> ( / [ *
+11. D => output -> 'AB-CD' ; stack -> ( / [ *
+12. + => output -> 'AB-CD' ; stack -> + ( / [ *
+13. E => output -> 'AB-CDE' ; stack -> + ( / [ *
+14. ) => output -> 'AB-CDE+' ; stack -> / [ *
+15. + => output -> 'AB-CDE+/' ; stack -> + [ *
+16. F => output -> 'AB-CDE+/F' ; stack -> + [ *
+17. ] => output -> 'AB-CDE+/F+' ; stack -> *
+
+since stack is non empty :
+
+ output : 'AB-CDE+/F+*'

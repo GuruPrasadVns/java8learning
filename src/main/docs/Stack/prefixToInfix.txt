@@ -1,0 +1,30 @@
+exp : *+AB-CD
+infix : ((A+B)*(C-D));
+--------------------------------------------------------
+Scan the expression from last
+stack -> empty
+1. D => stack -> D
+2. C => stack -> C D
+3. - => exp = (C - D) => push again => stack -> (C - D)
+4. B => stack -> B (C - D)
+5. A => stack -> A B (C - D)
+6. + => exp = (A + B) , push again => stack -> (A + B) (C - D)
+7. * => exp = ((A + B) * (C - D)) push again => stack -> ((A+B)*(C-D))
+
+result = stack.pop();
+
+************************************************************************************************************
+exp : *-A/BC-/AKL
+Infix : ((A-(B/C))*((A/K)-L))
+--------------------------------------------------------
+1. L => stack -> L
+2. K => stack -> K L
+3. A => stack -> A K L
+4. / => exp = (A / K ) then push => stack -> (A / K ) L
+5. - => exp = ((A / K ) - L) then push => stack -> ((A / K ) - L)
+6. C => stack -> C ((A / K ) - L)
+7. B => stack -> B C ((A / K ) - L)
+8. / => stack -> (B / C) ((A / K ) - L)
+9. A => stack -> A (B / C) ((A / K ) - L)
+10. - => stack -> (A - (B / C)) ((A / K ) - L)
+11. * => stack -> ((A - (B / C)) * ((A / K ) - L))

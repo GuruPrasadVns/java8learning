@@ -1,0 +1,22 @@
+exp : [()]{}{[()()]()}
+
+1. [ => stack -> [
+2. ( => stack -> ( [
+3. ) => if stack.pop() == (  => stack -> [
+4. ] =>  stack.pop == [ => stack -> empty
+5. { => stack -> {
+6. } => stack.pop == { => stack -> empty
+7. { => stack => {
+8. [ => stack => [ {
+9. ( => stack => ( [ {
+10. ) => stack.pop == ( => stack -> [ {
+11. ( => stack -> ( [ {
+12. ) => stack.pop == ( => stack -> [ {
+13. ] => stack.pop == [ => stack -> {
+14. ( => stack -> ( {
+15. ) => stack -> {
+16. } => stack -> empty
+
+if stack is empty balanced
+
+

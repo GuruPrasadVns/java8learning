@@ -1,0 +1,10 @@
+ exp : AB+CD-*
+result : *+AB-CD
+    stack -> empty
+ 1. A => stack -> A
+ 2. B => stack -> B A
+ 3. + => +AB and then push => stack -> +AB (string = operator2 + operand + operator1)
+ 4. C => stack -> C +AB
+ 5. D => stack -> D C +AB
+ 6. - => -CD then push => stack -> -CD +AB
+ 7. * => *+AB-CD then push => stack -> *+AB-CD
