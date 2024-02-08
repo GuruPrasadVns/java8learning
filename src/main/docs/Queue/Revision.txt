@@ -1,0 +1,37 @@
+Queue
+--------------------------------------
+    -> FIFO
+    -> insertion at rear and deletion from front
+
+    -> isEmpty, getSize, enqueue, dequeue, getFront, getRear
+
+Queue Using Array
+-------------------------------------------------------------------
+
+public class QueueUsingArray{
+    int[] arr;
+    int front;
+    int rear;
+    int size;
+    int capacity;
+
+    public QueueUsingArray(int capacity){
+        this.capacity = capacity;
+        this.arr =  new int[capacity];
+        this.size = 0;
+        this.front = -1;
+        this.rear = -1;
+    }
+
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    public void enqueue(int item) throws Exception {
+        if(size == capacity)
+            throw new Exception("Queue is Full");
+
+        int rear =
+    }
+}

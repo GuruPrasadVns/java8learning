@@ -1,0 +1,12 @@
+head -> 1 -> 2 -> 3 -> 4 -> null
+------------------------------------------
+
+getNthNodeFromLast(0) should output 4
+-----------------------------------------
+    Node current = head;
+    Node next = head;
+
+    for (int i = 0; i <= index; i++)
+        next = next.next;
+
+    if(
