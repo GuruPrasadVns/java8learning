@@ -1,0 +1,22 @@
+public static int findLargestUsingSorting(int[] arr){
+    int n = arr.length;
+    Arrays.sort(arr);
+
+    for(int i = n - 2; i >= 0; i--){
+        if(arr[i] != arr[n - 1]){
+            return arr[i];
+        }
+    }
+
+    return Integer.MIN_VALUE;
+}
+
+arr = { 12, 35, 1, 10, 34, 1 };
+n = 6;
+
+Arrays.sort(arr) => { 1, 1, 10, 12, 34, 35 };
+
+i = 4; i >= 0 (true)
+---------------------------------------------
+    if(arr[4] != arr[5]) : true
+        return arr[4] => return 34
