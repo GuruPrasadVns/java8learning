@@ -1,0 +1,26 @@
+Queue is a linear data structure that follows a particular order in which the operations are performed for storing data.
+
+The order is First In First Out (FIFO).
+
+One can imagine a queue as a line of people waiting to receive something in sequential order which starts from the
+beginning of the line.
+
+It is an ordered list in which insertions are done at one end which is known as the rear and deletions are done from
+the other end known as the front.
+
+Basic Operations on Queue:
+-------------------------------------------------------------------------------------------------------------------
+    enqueue(): Inserts an element at the end of the queue i.e. at the rear end.
+    dequeue(): This operation removes and returns an element that is at the front end of the queue.
+    front(): This operation returns the element at the front end without removing it.
+    rear(): This operation returns the element at the rear end without removing it.
+    isEmpty(): This operation indicates whether the queue is empty or not.
+    isFull(): This operation indicates whether the queue is full or not.
+    size(): This operation returns the size of the queue i.e. the total number of elements it contains.
+
+Types of Queues:
+-------------------------------------------------------------------------------------------------------------------
+    * Simple Queue
+    * Circular Queue
+    * Priority Queue
+    * Dequeue

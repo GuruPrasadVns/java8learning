@@ -1,0 +1,11 @@
+rear -> null
+front -> null
+size -> 0
+-----------------------------------------------------
+enqueue(1)
+-----------------------------------------
+    if(rear == null && front == null){
+        front = node;
+        rear = node;
+        return;
+    }

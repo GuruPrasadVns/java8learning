@@ -1,0 +1,31 @@
+
+QueueUsingArray queue = new QueueUsingArray(5);
+---------------------------------------------------
+    capacity = 5;
+    front = 0;
+    rear = 4;
+    size = 0;
+    arr = [ , , , , ];
+
+enqueue(1)
+--------------------------------------------------
+    if(size == capacity) : false
+    rear = (rear + 1) % capacity => rear = 5 % 5 => rear = 0
+    arr[0] = item => arr = [1, , , , ];
+    size =  size + 1 => size = 1
+
+dequeue(1)
+-----------------------------------------------
+    int item = arr[front] => item = 1
+    front = 1 % 5 => front = 1
+    size = 0;
+    return item;
+
+enqueue(2)
+------------------------------------------------
+    if(0 == 5) : false
+    rear = ( 0 + 1 ) % 5 => rear = 1
+    size = 1;
+arr[1] = 2;
+
+
